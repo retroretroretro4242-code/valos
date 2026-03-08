@@ -3,16 +3,15 @@ import discord
 from discord.ext import commands
 from database import Database
 
-TOKEN = os.getenv("TOKEN")  # Railway'den gelcek
+TOKEN = os.getenv("TOKEN")  # Railway’den gelecek
 
 intents = discord.Intents.default()
 intents.members = True
 intents.guilds = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
-db = Database()  # SQLite veritabanı bağlantısı
+db = Database()
 
-# Cog listesi
 COGS = [
     "cogs.teams",
     "cogs.matches",
@@ -33,7 +32,6 @@ async def on_ready():
     await bot.tree.sync()
     print(f"{bot.user} is online and ready!")
 
-# Database bağlantısını bot objesine ekliyoruz
 bot.db = db
 
 bot.run(TOKEN)
